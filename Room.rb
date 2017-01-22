@@ -30,4 +30,8 @@ class Room
     @guests.delete(guest)
   end
 
+  def at_full_capacity
+    return @capacity == @guests.count
+  end
+
 end

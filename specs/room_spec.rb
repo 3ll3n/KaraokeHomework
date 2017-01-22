@@ -17,9 +17,9 @@ class TestRooms < MiniTest::Test
    @song2 = Song.new("Flashdance, What a Feeling", "Irene Cara")
    @song3 =Song.new("Fame", "Irene Cara")
 
-    @guest = Guest.new("John Smith")
-    @guest2 = Guest.new("Jane Doe")
-    @guest3 = Guest.new("James Brown")
+    @guest = Guest.new("John Smith", 50)
+    @guest2 = Guest.new("Jane Doe", 60)
+    @guest3 = Guest.new("James Brown", 70)
 
   end
 
@@ -54,6 +54,17 @@ class TestRooms < MiniTest::Test
     @room2.add_guest(@guest2)
     @room2.remove_guest(@guest)
     assert_equal(1, @room2.guest_count)
+  end
+
+  def test_at_full_capacity
+    @room.add_guest(@guest)
+    @room.add_guest(@guest2)
+    assert_equal(true, @room.at_full_capacity)
+  end
+
+  def test_not_at_full_capacity
+    @room.add_guest(@guest)
+    assert_equal(false, @room.at_full_capacity)
   end
 
 end
